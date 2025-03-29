@@ -26,7 +26,7 @@ PPID_CMD=$(ps -o cmd= -p $PPID)
 echo "Command: $*" > "$JOB_FILE"
 echo "ParentCmd: $PPID_CMD" >> "$JOB_FILE"
 echo "Started: $(date)" >> "$JOB_FILE"
-echo "PID: $" >> "$JOB_FILE"
+echo "PID: $$" >> "$JOB_FILE"
 echo "PPID: $PPID" >> "$JOB_FILE"
 
 # Run the actual command
