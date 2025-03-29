@@ -20,12 +20,32 @@ cp check-shutdown.sh /usr/local/bin/check-shutdown
 chmod +x /usr/local/bin/prevent-shutdown
 chmod +x /usr/local/bin/check-shutdown
 
-# Every minute, if we should shut down, do shut down
-CRON_ENTRY='*/1 * * * * /usr/local/bin/check-shutdown >/dev/null 2>&1'
+cat > /etc/systemd/system/check-shutdown.service << EOF
+[Unit]
+Description=Check if server should shut down
+After=network.target
 
-if ! (crontab -l 2>/dev/null | grep -q "check-shutdown"); then
-  (crontab -l 2>/dev/null; echo "$CRON_ENTRY") | crontab -
-  echo "Added cron job for periodic shutdown checks."
-else
-  echo "Cron job already exists."
-fi
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/check-shutdown
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat > /etc/systemd/system/check-shutdown.timer << EOF
+[Unit]
+Description=Run check-shutdown periodically
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+
+[Install]
+WantedBy=timers.target
+EOF
+
+# Enable and start the timer
+systemctl enable check-shutdown.timer
+systemctl start check-shutdown.timer
+echo "Added systemd timer for periodic shutdown checks."
