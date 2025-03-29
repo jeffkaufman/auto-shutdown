@@ -30,8 +30,4 @@ echo "PID: $$" >> "$JOB_FILE"
 echo "PPID: $PPID" >> "$JOB_FILE"
 
 # Run the actual command
-echo "Running command: $*"
 "$@"
-
-# Exit with the same code as the command
-exit $?
