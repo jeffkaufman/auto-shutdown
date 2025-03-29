@@ -15,7 +15,10 @@ Run anything that should persist after you log out as:
 
     $ prevent-shutdown <cmd>
 
-Until the command exits, the machine will continue running.
+Until the command exits, the machine won't automatically shutdown.
+
+Note that you'll need to run `prevent-shutdown <cmd>` under `screen`, `tmux`,
+`nohup`, or similar if you want them to persist after you log out.
 
 ## Implementation
 
