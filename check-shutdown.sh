@@ -3,7 +3,7 @@
 # 1. No active jobs (tracked by prevent-shutdown)
 # 2. No active SSH connections
 
-JOBS_DIR="/var/run/prevent-shutdown"
+JOBS_DIR="/var/lib/prevent-shutdown"
 LOG_FILE="/var/log/auto-shutdown.log"
 
 log() {

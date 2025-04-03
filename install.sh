@@ -10,9 +10,9 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 mkdir -p /usr/local/bin
-mkdir -p /var/run/prevent-shutdown
+mkdir -p /var/lib/prevent-shutdown
 # Allow all users to create files here
-chmod 1777 /var/run/prevent-shutdown
+chmod 1777 /var/lib/prevent-shutdown
 
 cp prevent-shutdown.sh /usr/local/bin/prevent-shutdown
 cp check-shutdown.sh /usr/local/bin/check-shutdown

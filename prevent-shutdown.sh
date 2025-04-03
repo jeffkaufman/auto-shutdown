@@ -3,7 +3,7 @@
 set -e
 set -u
 
-JOBS_DIR="/var/run/prevent-shutdown"
+JOBS_DIR="/var/lib/prevent-shutdown"
 
 if [[ ! -d "$JOBS_DIR" ]]; then
     echo "$JOBS_DIR doesn't exist; did you run install.sh?"
